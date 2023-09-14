@@ -9,7 +9,7 @@ function Navbar() {
         <div className='p-4' style={{ textAlign: "center", fontSize: "60px", fontFamily: "Dancing Script", backgroundColor: "#4da9ff" }}>
           <b><i>Welcome To The Online School</i></b>
         </div>
-        <nav className="navbar navbar-expand-lg bg-dark navbar-dark">
+        <nav className="navbar navbar-expand-lg bg-success navbar-success">
           <div className="container-fluid">
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
@@ -44,20 +44,20 @@ function Navbar() {
 
                 {/*for teachers */}
                 <li className="nav-item">
-                  <Link className="nav-link active" aria-current="page" to="/">Students Info</Link>
+                  <Link className="nav-link active" aria-current="page" to="/find-student">Students Info</Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/">Attendance</Link>
+                  <Link className="nav-link" to="/attendance">Attendance</Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/">Publish Results</Link>
+                  <Link className="nav-link" to="/publish-result">Publish Results</Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/">Subjects</Link>
+                  <Link className="nav-link" to="/subject">Subjects</Link>
                 </li>
 
               </ul>
-              <button className="btn btn-outline-light d-flex">Logout</button>
+              <button className="btn btn-success d-flex">Logout</button>
             </div>
           </div>
         </nav>

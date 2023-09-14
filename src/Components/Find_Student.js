@@ -1,11 +1,11 @@
 import React from 'react'
 
-function Publish_Result() {
+function Find_Student() {
   return (
     <div className='container' style={{ marginTop: '2%', border: "1px solid #66a3ff", borderRadius: "5px", backgroundColor: "#66a3ff" }}>
       <div className="row mb-3">
         <div className="col" style={{ textAlign: "center", fontSize: "45px" }}>
-          <b>Publish Result</b>
+          <b>Student Info</b>
         </div>
       </div>
       <div className='row'>
@@ -29,11 +29,11 @@ function Publish_Result() {
               </select>
             </div>
             <div className="mb-3">
-              <label htmlFor="subject" className="form-label">Subject</label>
-              <select className="form-select" id='subject'>
-                <option>Bangka</option>
-                <option>English</option>
-                <option>Math</option>
+              <label htmlFor="roll" className="form-label">Roll</label>
+              <select className="form-select" id='roll'>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
               </select>
             </div>
             <button type="submit" className="btn btn-primary">Submit</button>
@@ -44,4 +44,4 @@ function Publish_Result() {
   )
 }
 
-export default Publish_Result
+export default Find_Student
