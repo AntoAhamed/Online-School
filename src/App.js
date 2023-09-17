@@ -30,10 +30,13 @@ function App() {
   const [classs, setClasss] = useState('')
   const [group, setGroup] = useState('')
   const [roll, setRoll] = useState('')
+  const [subject, setSubject] = useState('')
   const [profile, setProfile] = useState({})
   const [feedback, setFeedback] = useState({})
 
   console.log(profile)
+
+  console.log(classs)
 
   return (
     <div className="App">
@@ -42,16 +45,16 @@ function App() {
           <Route path="/" element={!user._id ? <Login setUser={setUser} type={type} setType={setType} /> : <Navbar type={type} logout={logout} />}>
             <Route index element={!user._id ? <Login setUser={setUser} type={type} setType={setType} /> : ''} />
             <Route path="class-routine" element={!user._id ? <Login setUser={setUser} type={type} setType={setType} /> : <ClassRoutine user={user} class={user.class} group={user.group} />} />
-            <Route path="result" element={!user._id ? <Login setUser={setUser} type={type} setType={setType} /> : <Result />} />
+            <Route path="result" element={!user._id ? <Login setUser={setUser} type={type} setType={setType} /> : <Result user={user} />} />
             <Route path="total-attendance" element={!user._id ? <Login setUser={setUser} type={type} setType={setType} /> : <TotalAttendance user={user} />} />
             <Route path="feedback" element={!user._id ? <Login setUser={setUser} type={type} setType={setType} /> : <Feedback />} />
             <Route path="find-student" element={!user._id ? <Login setUser={setUser} type={type} setType={setType} /> : <FindStudent classs={classs} setClasss={setClasss} group={group} setGroup={setGroup} roll={roll} setRoll={setRoll} setProfile={setProfile} />} />
             <Route path="student-profile" element={!user._id ? <Login setUser={setUser} type={type} setType={setType} /> : <StudentProfile profile={profile} />} />
             <Route path="attendance" element={!user._id ? <Login setUser={setUser} type={type} setType={setType} /> : <Attendance />} />
             <Route path="take-attendance" element={!user._id ? <Login setUser={setUser} type={type} setType={setType} /> : <TakeAttendance />} />
-            <Route path="publish-result" element={!user._id ? <Login setUser={setUser} type={type} setType={setType} /> : <PublishResult />} />
-            <Route path="publish-result-2" element={!user._id ? <Login setUser={setUser} type={type} setType={setType} /> : <PublishResult2 />} />
-            <Route path="subject" element={!user._id ? <Login setUser={setUser} type={type} setType={setType} /> : <Subject />} />
+            <Route path="publish-result" element={!user._id ? <Login setUser={setUser} type={type} setType={setType} /> : <PublishResult classs={classs} setClasss={setClasss} group={group} setGroup={setGroup} subject={subject} setSubject={setSubject} />} />
+            <Route path="publish-result-2" element={!user._id ? <Login setUser={setUser} type={type} setType={setType} /> : <PublishResult2 classs={classs} setClasss={setClasss} group={group} setGroup={setGroup} subject={subject} setSubject={setSubject} />} />
+            <Route path="subject" element={!user._id ? <Login setUser={setUser} type={type} setType={setType} /> : <Subject user={user} />} />
           </Route>
         </Routes>
       </BrowserRouter>

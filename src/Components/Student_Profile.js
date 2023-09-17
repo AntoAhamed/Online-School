@@ -4,7 +4,7 @@ function Student_Profile(props) {
     return (
         <div>
             <div className='p-2 m-2'>
-                <p className='p-1 m-1' style={{ textAlign: "center", fontSize: "30px", fontFamily: "Dancing Script" }}><b><i>Profile Of {props.profile?.name}</i></b></p>
+                <p className='p-1 m-1' style={{ textAlign: "center", fontSize: "30px", fontFamily: "Dancing Script" }}><b><i><u>Profile Of {props.profile?.name}</u></i></b></p>
             </div>
             <div className=' container p-2 m-2'>
                 <p className='' style={{ fontSize: "20px", fontFamily: "Dancing Script", padding: "1% 0% 0% 10%" }}><b><i>Name: {props.profile?.name}</i></b></p>

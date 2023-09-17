@@ -59,6 +59,19 @@ const routinesSchema = new mongoose.Schema({
 
 const ROUTINES = mongoose.model('routines', routinesSchema);
 
+const resultSchema = new mongoose.Schema({
+    class: { type: Number },
+    group: { type: String },
+    roll: { type: String },
+    subject: { type: String },
+    CT1: { type: Number },
+    mid: { type: Number },
+    CT2: { type: Number , default: 0},
+    final: { type: Number }
+});
+
+const RESULT = mongoose.model('result', resultSchema);
+
 var tmpUser, tmpType;
 
 //login api
@@ -189,12 +202,12 @@ app.post('/get_routine', async (req, res) => {
     }
 })
 
-app.post('/studentProfile', async (req, res) => {
+app.post('/student_profile', async (req, res) => {
     const { classs, group, roll } = req.body;
 
     console.log(classs, group, roll)
 
-    const check = await STUDENTS.findOne({class: classs, group: group, roll: roll});
+    const check = await STUDENTS.findOne({ class: classs, group: group, roll: roll });
 
     try {
         if (check) {
@@ -203,6 +216,123 @@ app.post('/studentProfile', async (req, res) => {
         }
         else {
             res.json("failed");
+        }
+    }
+    catch (e) {
+        console.log(e);
+    }
+})
+
+//api to get subjects of the day for teacher
+app.post('/get_subjects', async (req, res) => {
+    const { name } = req.body;
+
+    const d = new Date();
+
+    let day = d.getDay();
+    console.log(day)
+
+    let today;
+
+    switch (day) {
+        case 0:
+            today = "sunday";
+            break;
+        case 1:
+            today = "monday";
+            break;
+        case 2:
+            today = "tuesday";
+            break;
+        case 3:
+            today = "wednesday";
+            break;
+        case 4:
+            today = "thursday";
+            break;
+        default:
+            today = "sunday";
+            break;
+    }
+
+    console.log(name, today);
+    const check = await ROUTINES.find({ teacher: name, day: today });
+
+    try {
+        if (check) {
+            res.send({ data: check });
+            console.log(check.length);
+        }
+        else {
+            res.json("something wrong!");
+        }
+    }
+    catch (e) {
+        console.log(e);
+    }
+})
+
+app.post('/get_students', async (req, res) => {
+    const { classs, group } = req.body;
+
+    const check = await STUDENTS.find({ class: classs, group: group });
+    console.log(classs, group);
+
+    try {
+        if (check) {
+            res.send({ data: check });
+            console.log(check);
+        }
+        else {
+            res.json("failed");
+        }
+    }
+    catch (e) {
+        console.log(e);
+    }
+})
+
+app.post('/publish_result', async (req, res) => {
+    const { classs, group, roll, subject, CT1, mid, CT2, final } = req.body;
+
+    console.log(classs, group, roll, subject, CT1, mid, CT2, final)
+    
+    const data = {
+        class: classs,
+        group: group,
+        roll: roll,
+        subject: subject,
+        CT1: CT1,
+        mid: mid,
+        CT2: CT2,
+        final: final
+    }
+
+    const check = await RESULT.findOne({class: classs, group: group, roll: roll, subject: subject});
+
+    try {
+        if (check) {
+            res.json("failed");
+        }
+        else {
+            await RESULT.insertMany([data]);
+            res.json("success");
+        }
+    }
+    catch (e) {
+        console.log(e);
+    }
+})
+
+app.post('/get_result', async (req, res) => {
+    const { classs, group, roll } = req.body;
+
+    const check = await RESULT.find({ class: classs, group: group, roll: roll });
+
+    try {
+        if (check) {
+            res.send({ data: check });
+            console.log(check.length);
         }
     }
     catch (e) {

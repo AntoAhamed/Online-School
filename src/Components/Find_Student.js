@@ -14,7 +14,7 @@ function Find_Student(props) {
       const roll = props.roll;
 
       try {
-        await axios.post('http://localhost:8000/studentProfile', { classs, group, roll })
+        await axios.post('http://localhost:8000/student_profile', { classs, group, roll })
           .then(res => {
             if (res.data === "failed") {
               alert("Student dosen't exists!");
@@ -55,7 +55,7 @@ function Find_Student(props) {
           <form action='' method='' className='login-form'>
             <div className="mb-3">
               <label htmlFor="class" className="form-label">Class</label>
-              <input type="number" className="form-control" value={props.classs} onChange={(e) => { props.setClasss(e.target.value) }} id="class" placeholder="9/10/11/12" />
+              <input type="number" className="form-control" value={props.classs} onChange={(e) => { props.setClasss(e.target.value) }} id="class" min={9} max={12} placeholder="9/10/11/12" />
             </div>
             <div className="mb-3">
               <label htmlFor="group" className="form-label">Group</label>

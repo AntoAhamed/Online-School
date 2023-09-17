@@ -39,6 +39,7 @@ function Class_Routine(props) {
         <table className="table p-1 m-1">
           <thead className="table-dark">
             <tr>
+            <th>Day</th>
               <th>Subject</th>
               <th>Time</th>
               <th>Teacher</th>
@@ -50,9 +51,10 @@ function Class_Routine(props) {
             {routine.map((e) => {
               return (
                 <tr key={e._id}>
-                  <td>{e.subject}..</td>
-                  <td>{e.time}..</td>
-                  <td>{e.teacher}..</td>
+                  <td>{e.day}</td>
+                  <td>{e.subject}</td>
+                  <td>{e.time}</td>
+                  <td>{e.teacher}</td>
                   <td>{e.meet}</td>
                   <td>{e.classroom}</td>
                 </tr>

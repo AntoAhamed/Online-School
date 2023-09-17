@@ -1,15 +1,36 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
+import axios from 'axios';
 
-function Subjects() {
+function Subjects(props) {
+  const [routine, setRoutine] = useState([]);
+  const name = props.user?.name;
+
+  const getSubjects = () => {
+    axios.post('http://localhost:8000/get_subjects', { name })
+      .then(res => {
+        const data = res.data;
+        console.log("Data has been received successfully");
+        setRoutine(data.data);
+        console.log(routine);
+      }).catch(e => {
+        console.log(e);
+      });
+  }
+
+  useEffect(() => {
+    getSubjects();
+  }, [])
+
   return (
     <div>
       <div className='p-2 m-2'>
-        <p className='p-1 m-1' style={{ textAlign: "center", fontSize: "30px", fontFamily: "Dancing Script" }}><b><i>Assigned Subjects To [Teacher Name]</i></b></p>
+        <p className='p-1 m-1' style={{ textAlign: "center", fontSize: "30px", fontFamily: "Dancing Script" }}><b><i>Assigned Subjects To {name}</i></b></p>
       </div>
       <div className='p-2 m-2'>
-        <table class="table p-1 m-1">
-          <thead class="table-dark">
+        <table className="table p-1 m-1">
+          <thead className="table-dark">
             <tr>
+              <th>Day</th>
               <th>Class</th>
               <th>Group</th>
               <th>Subject</th>
@@ -19,70 +40,19 @@ function Subjects() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>9</td>
-              <td>Science</td>
-              <td>Bangla</td>
-              <td>08:00</td>
-              <td>...</td>
-              <td>...</td>
-            </tr>
-            <tr>
-              <td>9</td>
-              <td>Science</td>
-              <td>English</td>
-              <td>08:51</td>
-              <td>...</td>
-              <td>...</td>
-            </tr>
-            <tr>
-              <td>9</td>
-              <td>Science</td>
-              <td>Math</td>
-              <td>09:41</td>
-              <td>...</td>
-              <td>...</td>
-            </tr>
-            <tr>
-              <td>9</td>
-              <td>Science</td>
-              <td>ICT</td>
-              <td>11:00</td>
-              <td>...</td>
-              <td>...</td>
-            </tr>
-            <tr>
-              <td>9</td>
-              <td>Science</td>
-              <td>Physics</td>
-              <td>11:51</td>
-              <td>...</td>
-              <td>...</td>
-            </tr>
-            <tr>
-              <td>9</td>
-              <td>Science</td>
-              <td>Chamistry</td>
-              <td>12:41</td>
-              <td>...</td>
-              <td>...</td>
-            </tr>
-            <tr>
-              <td>9</td>
-              <td>Science</td>
-              <td>Higher Math</td>
-              <td>01:31</td>
-              <td>...</td>
-              <td>...</td>
-            </tr>
-            <tr>
-              <td>9</td>
-              <td>Science</td>
-              <td>Biology</td>
-              <td>02:21</td>
-              <td>...</td>
-              <td>...</td>
-            </tr>
+            {routine.map((e) => {
+              return (
+                <tr key={e._id}>
+                  <td>{e.day}</td>
+                  <td>{e.class}</td>
+                  <td>{e.group}</td>
+                  <td>{e.subject}</td>
+                  <td>{e.time}</td>
+                  <td>{e.meet}</td>
+                  <td>{e.classroom}</td>
+                </tr>
+              )
+            })}
           </tbody>
         </table>
       </div>
