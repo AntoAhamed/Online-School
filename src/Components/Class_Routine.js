@@ -1,17 +1,43 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios';
 
-function Class_Routine() {
+function Class_Routine(props) {
+  const [routine, setRoutine] = useState([]);
+  const classs = props.class;
+  const group = props.group;
+
+  const getRoutine = () => {
+    axios.post('http://localhost:8000/get_routine', { classs, group })
+      .then(res => {
+        if (res.data === "failed") {
+          alert("Routine not found");
+        }
+        else {
+          const data = res.data;
+          console.log("Data has been received successfully");
+          setRoutine(data.data);
+          console.log(routine);
+        }
+      }).catch(e => {
+        console.log(e);
+      });
+  }
+
+  useEffect(() => {
+    getRoutine();
+  }, [])
+
   return (
     <div>
       <div className='p-2 m-2'>
         <p className='p-1 m-1' style={{ textAlign: "center", fontSize: "30px", fontFamily: "Dancing Script" }}><b><i>Class Routine</i></b></p>
       </div>
       <div className='p-2 m-2'>
-        <p className='p-1 m-1' style={{ textAlign: "center", fontSize: "20px", fontFamily: "Dancing Script" }}><b><i><pre>Class: 9                                                  Group: Science</pre></i></b></p>
+        <p className='p-1 m-1' style={{ textAlign: "center", fontSize: "20px", fontFamily: "Dancing Script" }}><b><i><pre>Class: {props.user?.class}                                                  Group: {props.user?.group}</pre></i></b></p>
       </div>
       <div className='p-2 m-2'>
-        <table class="table p-1 m-1">
-          <thead class="table-dark">
+        <table className="table p-1 m-1">
+          <thead className="table-dark">
             <tr>
               <th>Subject</th>
               <th>Time</th>
@@ -21,62 +47,17 @@ function Class_Routine() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Bangla</td>
-              <td>08:00</td>
-              <td>Asif</td>
-              <td>...</td>
-              <td>...</td>
-            </tr>
-            <tr>
-              <td>English</td>
-              <td>08:51</td>
-              <td>Atif</td>
-              <td>...</td>
-              <td>...</td>
-            </tr>
-            <tr>
-              <td>Math</td>
-              <td>09:41</td>
-              <td>Aslam</td>
-              <td>...</td>
-              <td>...</td>
-            </tr>
-            <tr>
-              <td>ICT</td>
-              <td>11:00</td>
-              <td>Anto</td>
-              <td>...</td>
-              <td>...</td>
-            </tr>
-            <tr>
-              <td>Physics</td>
-              <td>11:51</td>
-              <td>Akash</td>
-              <td>...</td>
-              <td>...</td>
-            </tr>
-            <tr>
-              <td>Chamistry</td>
-              <td>12:41</td>
-              <td>Ali</td>
-              <td>...</td>
-              <td>...</td>
-            </tr>
-            <tr>
-              <td>Higher Math</td>
-              <td>01:31</td>
-              <td>Alauddin</td>
-              <td>...</td>
-              <td>...</td>
-            </tr>
-            <tr>
-              <td>Biology</td>
-              <td>02:21</td>
-              <td>JO</td>
-              <td>...</td>
-              <td>...</td>
-            </tr>
+            {routine.map((e) => {
+              return (
+                <tr key={e._id}>
+                  <td>{e.subject}..</td>
+                  <td>{e.time}..</td>
+                  <td>{e.teacher}..</td>
+                  <td>{e.meet}</td>
+                  <td>{e.classroom}</td>
+                </tr>
+              )
+            })}
           </tbody>
         </table>
       </div>

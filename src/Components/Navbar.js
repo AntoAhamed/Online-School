@@ -2,7 +2,7 @@ import React from 'react'
 import { Outlet, Link } from "react-router-dom";
 
 
-function Navbar() {
+function Navbar(props) {
   return (
     <>
       <div>
@@ -18,46 +18,46 @@ function Navbar() {
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
 
                 {/*for students */}
-                <li className="nav-item">
+                <li className="nav-item" style={{display: `${props.type==="student" ? '' : "none"}`}}>
                   <Link className="nav-link active" aria-current="page" to="/class-routine">Class Routine</Link>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item" style={{display: `${props.type==="student" ? '' : "none"}`}}>
                   <Link className="nav-link" to="/result">Result</Link>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item" style={{display: `${props.type==="student" ? '' : "none"}`}}>
                   <Link className="nav-link" to="/total-attendance">Total Attendance</Link>
                 </li>
 
                 {/*for parents */}
-                <li className="nav-item">
+                <li className="nav-item" style={{display: `${props.type==="parent" ? '' : "none"}`}}>
                   <Link className="nav-link active" aria-current="page" to="/class-routine">Class Routine</Link>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item" style={{display: `${props.type==="parent" ? '' : "none"}`}}>
                   <Link className="nav-link" to="/result">Result</Link>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item" style={{display: `${props.type==="parent" ? '' : "none"}`}}>
                   <Link className="nav-link" to="/total-attendance">Total Attendance</Link>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item" style={{display: `${props.type==="parent" ? '' : "none"}`}}>
                   <Link className="nav-link" to="/feedback">Feedbacks</Link>
                 </li>
 
                 {/*for teachers */}
-                <li className="nav-item">
+                <li className="nav-item" style={{display: `${props.type==="teacher" ? '' : "none"}`}}>
                   <Link className="nav-link active" aria-current="page" to="/find-student">Students Info</Link>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item" style={{display: `${props.type==="teacher" ? '' : "none"}`}}>
                   <Link className="nav-link" to="/attendance">Attendance</Link>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item" style={{display: `${props.type==="teacher" ? '' : "none"}`}}>
                   <Link className="nav-link" to="/publish-result">Publish Results</Link>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item" style={{display: `${props.type==="teacher" ? '' : "none"}`}}>
                   <Link className="nav-link" to="/subject">Subjects</Link>
                 </li>
 
               </ul>
-              <button className="btn btn-success d-flex">Logout</button>
+              <button className="btn btn-success d-flex" onClick={props.logout}>Logout</button>
             </div>
           </div>
         </nav>

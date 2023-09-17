@@ -1,6 +1,48 @@
 import React from 'react'
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-function Find_Student() {
+function Find_Student(props) {
+  const navigate = useNavigate()
+
+  async function submit(e) {
+    e.preventDefault();
+
+    if (props.classs !== '' && props.group !== '' && props.roll !== '') {
+      const classs = props.classs;
+      const group = props.group;
+      const roll = props.roll;
+
+      try {
+        await axios.post('http://localhost:8000/studentProfile', { classs, group, roll })
+          .then(res => {
+            if (res.data === "failed") {
+              alert("Student dosen't exists!");
+            }
+            else {
+              const data = res.data;
+              console.log("Data has been received successfully");
+              props.setProfile(data.data);
+              console.log(data.data);
+              props.setClasss('');
+              props.setGroup('');
+              props.setRoll('');
+              alert("Student found");
+              navigate("/student-profile");
+            }
+          }).catch(e => {
+            console.log(e);
+          });
+      }
+      catch (e) {
+        console.log(e);
+      }
+    }
+    else {
+      alert("Empty field can't be submitted!");
+    }
+  }
+
   return (
     <div className='container' style={{ marginTop: '2%', border: "1px solid #66a3ff", borderRadius: "5px", backgroundColor: "#66a3ff" }}>
       <div className="row mb-3">
@@ -13,30 +55,17 @@ function Find_Student() {
           <form action='' method='' className='login-form'>
             <div className="mb-3">
               <label htmlFor="class" className="form-label">Class</label>
-              <select className="form-select" id='class'>
-                <option>9</option>
-                <option>10</option>
-                <option>11</option>
-                <option>12</option>
-              </select>
+              <input type="number" className="form-control" value={props.classs} onChange={(e) => { props.setClasss(e.target.value) }} id="class" placeholder="9/10/11/12" />
             </div>
             <div className="mb-3">
               <label htmlFor="group" className="form-label">Group</label>
-              <select className="form-select" id='group'>
-                <option>Science</option>
-                <option>Business</option>
-                <option>Arts</option>
-              </select>
+              <input type="text" className="form-control" value={props.group} onChange={(e) => { props.setGroup(e.target.value) }} id="group" placeholder="science/commerce/arts" />
             </div>
             <div className="mb-3">
               <label htmlFor="roll" className="form-label">Roll</label>
-              <select className="form-select" id='roll'>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-              </select>
+              <input type="text" className="form-control" value={props.roll} onChange={(e) => { props.setRoll(e.target.value) }} id="roll" placeholder="any" />
             </div>
-            <button type="submit" className="btn btn-primary">Submit</button>
+            <button type="submit" onClick={submit} className="btn btn-primary">Submit</button>
           </form>
         </div>
       </div>
