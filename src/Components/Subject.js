@@ -40,7 +40,7 @@ function Subjects(props) {
             </tr>
           </thead>
           <tbody>
-            {routine.map((e) => {
+            {routine.length === 0 ? "No data to show" : routine.map((e) => {
               return (
                 <tr key={e._id}>
                   <td>{e.day}</td>

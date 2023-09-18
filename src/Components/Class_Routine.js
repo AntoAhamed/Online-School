@@ -39,7 +39,7 @@ function Class_Routine(props) {
         <table className="table p-1 m-1">
           <thead className="table-dark">
             <tr>
-            <th>Day</th>
+              <th>Day</th>
               <th>Subject</th>
               <th>Time</th>
               <th>Teacher</th>
@@ -48,7 +48,7 @@ function Class_Routine(props) {
             </tr>
           </thead>
           <tbody>
-            {routine.map((e) => {
+            {routine.length === 0 ? "No data to show" : routine.map((e) => {
               return (
                 <tr key={e._id}>
                   <td>{e.day}</td>

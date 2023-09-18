@@ -1,6 +1,37 @@
 import React from 'react'
+import axios from 'axios';
 
 function Student_Profile(props) {
+    const classs = props.profile?.class;
+    const group = props.profile?.group;
+    const roll = props.profile?.roll;
+    const feedback = props.feedback;
+    const T_name = props.user?.name;
+    const T_contact = props.user?.contact;
+    const T_email = props.user?.email;
+
+    console.log(T_contact);
+
+    const submit = () => {
+        if (feedback !== '') {
+            axios.post('http://localhost:8000/post_feedback', { classs, group, roll, feedback, T_name, T_contact, T_email })
+                .then(res => {
+                    if (res.data === "success") {
+                        alert("Feedback given successfully");
+                        props.setFeedback('')
+                    }
+                    else {
+                        alert("Something went wrong!")
+                    }
+                }).catch(e => {
+                    console.log(e);
+                });
+        }
+        else {
+            alert("Empty field can't be submitted!");
+        }
+    }
+
     return (
         <div>
             <div className='p-2 m-2'>
@@ -17,8 +48,8 @@ function Student_Profile(props) {
                 <p className='' style={{ fontSize: "20px", fontFamily: "Dancing Script", padding: "1% 0% 0% 10%" }}><b><i>Email: {props.profile?.email}</i></b></p>
                 <div className='mb-3' style={{ fontSize: "20px", fontFamily: "Dancing Script", padding: "2% 0% 0% 10%" }}>
                     <p className=''><b><i>Feedback: </i></b></p>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" placeholder='Enter feedback here'></textarea>
-                    <button type="submit" class="btn btn-primary mt-2">Submit</button>
+                    <textarea className="form-control" value={props.feedback} onChange={(e) => { props.setFeedback(e.target.value) }} id="exampleFormControlTextarea1" rows="5" placeholder='Enter feedback here'></textarea>
+                    <button type="submit" onClick={submit} class="btn btn-primary mt-2">Submit</button>
                 </div>
             </div>
         </div>

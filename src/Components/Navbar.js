@@ -7,7 +7,7 @@ function Navbar(props) {
     <>
       <div>
         <div className='p-4' style={{ textAlign: "center", fontSize: "60px", fontFamily: "Dancing Script", backgroundColor: "#4da9ff" }}>
-          <b><i>Welcome To The Online School</i></b>
+          <b><i>Welcome To The Future Way School & Collage</i></b>
         </div>
         <nav className="navbar navbar-expand-lg bg-success navbar-success">
           <div className="container-fluid">

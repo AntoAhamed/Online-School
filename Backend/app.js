@@ -66,11 +66,32 @@ const resultSchema = new mongoose.Schema({
     subject: { type: String },
     CT1: { type: Number },
     mid: { type: Number },
-    CT2: { type: Number , default: 0},
+    CT2: { type: Number, default: 0 },
     final: { type: Number }
 });
 
-const RESULT = mongoose.model('result', resultSchema);
+const RESULT = mongoose.model('results', resultSchema);
+
+const feedbackSchema = new mongoose.Schema({
+    class: { type: Number },
+    group: { type: String },
+    roll: { type: String },
+    feedback: { type: String },
+    name: { type: String },
+    contact: { type: String },
+    email: { type: String }
+});
+
+const FEEDBACK = mongoose.model('feedbacks', feedbackSchema);
+
+const attendanceSchema = new mongoose.Schema({
+    class: { type: Number },
+    group: { type: String },
+    roll: { type: String },
+    date: { type: String }
+});
+
+const ATTENDANCE = mongoose.model('attendances', attendanceSchema);
 
 var tmpUser, tmpType;
 
@@ -296,7 +317,7 @@ app.post('/publish_result', async (req, res) => {
     const { classs, group, roll, subject, CT1, mid, CT2, final } = req.body;
 
     console.log(classs, group, roll, subject, CT1, mid, CT2, final)
-    
+
     const data = {
         class: classs,
         group: group,
@@ -308,7 +329,7 @@ app.post('/publish_result', async (req, res) => {
         final: final
     }
 
-    const check = await RESULT.findOne({class: classs, group: group, roll: roll, subject: subject});
+    const check = await RESULT.findOne({ class: classs, group: group, roll: roll, subject: subject });
 
     try {
         if (check) {
@@ -333,6 +354,90 @@ app.post('/get_result', async (req, res) => {
         if (check) {
             res.send({ data: check });
             console.log(check.length);
+        }
+    }
+    catch (e) {
+        console.log(e);
+    }
+})
+
+app.post('/post_feedback', async (req, res) => {
+    const { classs, group, roll, feedback, T_name, T_contact, T_email } = req.body;
+
+    console.log(T_contact);
+
+    const data = {
+        class: classs,
+        group: group,
+        roll: roll,
+        feedback: feedback,
+        name: T_name,
+        contact: T_contact,
+        email: T_email
+    }
+
+    try {
+        await FEEDBACK.insertMany([data]);
+        res.json("success");
+    }
+    catch (e) {
+        console.log(e);
+    }
+})
+
+app.post('/get_feedbacks', async (req, res) => {
+    const { classs, group, roll } = req.body;
+
+    const check = await FEEDBACK.find({ class: classs, group: group, roll: roll });
+
+    try {
+        if (check) {
+            res.send({ data: check });
+            console.log(check.length);
+        }
+    }
+    catch (e) {
+        console.log(e);
+    }
+})
+
+app.post('/attendance', async (req, res) => {
+    const { classs, group, roll, value } = req.body;
+
+    const d = new Date();
+
+    const date = d.toLocaleDateString();
+
+    const data = {
+        class: classs,
+        group: group,
+        roll: roll,
+        date: date
+    }
+
+    const check = await ATTENDANCE.findOne({ class: classs, group: group, roll: roll, date: date });
+
+    const student = await STUDENTS.findOne({ class: classs, group: group, roll: roll });
+
+    var total = student.total;
+    var present = student.present;
+    var absent = student.absent;
+
+    try {
+        if(!check){
+            total++;
+            if(value==="present"){
+                present++;
+            }
+            if(value==="absent"){
+                absent++;
+            }
+            await ATTENDANCE.insertMany([data]);
+            await STUDENTS.updateOne({ class: classs, group: group, roll: roll }, { $set: { total: total, present: present, absent: absent } });
+            res.json("success");
+        }
+        else{
+            res.json("failed");
         }
     }
     catch (e) {

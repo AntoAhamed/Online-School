@@ -91,7 +91,7 @@ function Publish_Result_2(props) {
                         </tr>
                     </thead>
                     <tbody>
-                        {students.map((e) => {
+                        {students.length === 0 ? "No data to show" : students.map((e) => {
                             return (
                                 <tr key={e._id}>
                                     <td>{e.roll}</td>
