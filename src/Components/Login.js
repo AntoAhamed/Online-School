@@ -5,20 +5,20 @@ function Login(props) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
+  var tmp = username;
+
+  if (tmp[0] === 's') {
+    props.setType("student");
+  }
+  if (tmp[0] === 'p') {
+    props.setType("parent");
+  }
+  if (tmp[0] === 't') {
+    props.setType("teacher");
+  }
+
   async function login(e) {
     e.preventDefault();
-
-    let tmp = username;
-
-    if (tmp[0] === 's') {
-      props.setType("student");
-    }
-    if (tmp[0] === 'p') {
-      props.setType("parent");
-    }
-    if (tmp[0] === 't') {
-      props.setType("teacher");
-    }
 
     if (username !== '' && password !== '') {
       let type = props.type;
