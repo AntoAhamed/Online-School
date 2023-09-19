@@ -9,9 +9,7 @@ function Find_Student(props) {
     e.preventDefault();
 
     if (props.classs !== '' && props.group !== '' && props.roll !== '') {
-      const classs = props.classs;
-      const group = props.group;
-      const roll = props.roll;
+      const { classs, group, roll } = props;
 
       try {
         await axios.post('http://localhost:8000/student_profile', { classs, group, roll })

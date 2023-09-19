@@ -3,9 +3,7 @@ import axios from 'axios';
 
 function Publish_Result_2(props) {
     const [students, setStudents] = useState([]);
-    const classs = props.classs;
-    const group = props.group;
-    const subject = props.subject;
+    const { classs, group, subject } = props;
 
     const [CT1, setCT1] = useState('')
     const [CT2, setCT2] = useState('')
@@ -59,6 +57,7 @@ function Publish_Result_2(props) {
 
     useEffect(() => {
         getStudents();
+        // eslint-disable-next-line
     }, [])
 
     return (
@@ -72,7 +71,7 @@ function Publish_Result_2(props) {
             <div className='p-2 m-2'>
                 <table class="table p-1 m-1">
                     <thead class="table-dark">
-                        <tr style={{ display: `${classs === 9 || classs === 11 ? "" : "none"}` }}>
+                        <tr style={{ display: `${classs === 9 || classs === 11 ? '' : "none"}` }}>
                             <th>Roll</th>
                             <th>Name</th>
                             <th>CT1</th>
@@ -81,7 +80,7 @@ function Publish_Result_2(props) {
                             <th>Final</th>
                             <th>Submit</th>
                         </tr>
-                        <tr style={{ display: `${classs === 10 || classs === 12 ? "" : "none"}` }}>
+                        <tr style={{ display: `${classs === 10 || classs === 12 ? '' : "none"}` }}>
                             <th>Roll</th>
                             <th>Name</th>
                             <th>CT</th>
@@ -97,16 +96,16 @@ function Publish_Result_2(props) {
                                     <td>{e.roll}</td>
                                     <td>{e.name}</td>
                                     <td>
-                                        <input type="number" className="form-control" value={CT1} onChange={(e) => { setCT1(e.target.value) }} id="username" placeholder={`${classs !== 9 || classs !== 11 ? "CT1" : "CT"}`} />
+                                        <input type="number" className="form-control" value={CT1} onChange={(e) => { setCT1(e.target.value) }} id="username" placeholder={`${classs === 9 || classs === 11 ? "CT1" : "CT"}`} />
                                     </td>
                                     <td>
-                                        <input type="number" className="form-control" value={mid} onChange={(e) => { setMid(e.target.value) }} id="username" placeholder={`${classs !== 9 || classs !== 11 ? "Half Yearly" : "Pretest"}`} />
+                                        <input type="number" className="form-control" value={mid} onChange={(e) => { setMid(e.target.value) }} id="username" placeholder={`${classs === 9 || classs === 11 ? "Half Yearly" : "Pretest"}`} />
                                     </td>
-                                    <td style={{ display: `${classs !== 9 || classs !== 11 ? "" : "none"}` }}>
+                                    <td style={{ display: `${classs === 9 || classs === 11 ? "" : "none"}` }}>
                                         <input type="number" className="form-control" value={CT2} onChange={(e) => { setCT2(e.target.value) }} id="username" placeholder="CT2" />
                                     </td>
                                     <td>
-                                        <input type="number" className="form-control" value={final} onChange={(e) => { setFinal(e.target.value) }} id="username" placeholder={`${classs !== 9 || classs !== 11 ? "Final" : "Test"}`} />
+                                        <input type="number" className="form-control" value={final} onChange={(e) => { setFinal(e.target.value) }} id="username" placeholder={`${classs === 9 || classs === 11 ? "Final" : "Test"}`} />
                                     </td>
                                     <td>
                                         <button onClick={() => submit(e.roll)} className="btn btn-primary">Submit</button>

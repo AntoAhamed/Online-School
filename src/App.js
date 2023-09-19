@@ -21,11 +21,6 @@ function App() {
   console.log(user)
   console.log(type)
 
-  const logout = () => {
-    setUser({});
-    setType('');
-  }
-
   //teacher
   const [classs, setClasss] = useState('')
   const [group, setGroup] = useState('')
@@ -38,23 +33,32 @@ function App() {
 
   console.log(classs)
 
+  const logout = () => {
+    setUser({});
+    setType('');
+    setClasss('');
+    setGroup('');
+    setRoll('');
+    setSubject('');
+  }
+
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
           <Route path="/" element={!user._id ? <Login setUser={setUser} type={type} setType={setType} /> : <Navbar type={type} logout={logout} />}>
             <Route index element={!user._id ? <Login setUser={setUser} type={type} setType={setType} /> : ''} />
-            <Route path="class-routine" element={!user._id && type === "teacher" ? <Login setUser={setUser} type={type} setType={setType} /> : <ClassRoutine user={user} class={user.class} group={user.group} />} />
-            <Route path="result" element={!user._id && type === "teacher" ? <Login setUser={setUser} type={type} setType={setType} /> : <Result user={user} />} />
-            <Route path="total-attendance" element={!user._id && type === "teacher" ? <Login setUser={setUser} type={type} setType={setType} /> : <TotalAttendance user={user} />} />
-            <Route path="feedback" element={!user._id && (type === "teacher" || type === "student") ? <Login setUser={setUser} type={type} setType={setType} /> : <Feedback user={user} />} />
-            <Route path="find-student" element={!user._id && type !== "teacher" ? <Login setUser={setUser} type={type} setType={setType} /> : <FindStudent classs={classs} setClasss={setClasss} group={group} setGroup={setGroup} roll={roll} setRoll={setRoll} setProfile={setProfile} />} />
-            <Route path="student-profile" element={!user._id  && type !== "teacher" ? <Login setUser={setUser} type={type} setType={setType} /> : <StudentProfile profile={profile} feedback={feedback} setFeedback={setFeedback} user={user} />} />
-            <Route path="attendance" element={!user._id  && type !== "teacher" ? <Login setUser={setUser} type={type} setType={setType} /> : <Attendance classs={classs} setClasss={setClasss} group={group} setGroup={setGroup} />} />
-            <Route path="take-attendance" element={!user._id  && type !== "teacher" ? <Login setUser={setUser} type={type} setType={setType} /> : <TakeAttendance classs={classs} group={group} />} />
-            <Route path="publish-result" element={!user._id  && type !== "teacher" ? <Login setUser={setUser} type={type} setType={setType} /> : <PublishResult classs={classs} setClasss={setClasss} group={group} setGroup={setGroup} subject={subject} setSubject={setSubject} />} />
-            <Route path="publish-result-2" element={!user._id  && type !== "teacher" ? <Login setUser={setUser} type={type} setType={setType} /> : <PublishResult2 classs={classs} group={group} subject={subject} />} />
-            <Route path="subject" element={!user._id  && type !== "teacher" ? <Login setUser={setUser} type={type} setType={setType} /> : <Subject user={user} />} />
+            <Route path="class-routine" element={type === "student" || type === "parent" ? <ClassRoutine user={user} class={user.class} group={user.group} /> : ''} />
+            <Route path="result" element={type === "student" || type === "parent" ? <Result user={user} /> : ''} />
+            <Route path="total-attendance" element={type === "student" || type === "parent" ? <TotalAttendance user={user} /> : ''} />
+            <Route path="feedback" element={type === "parent" ? <Feedback user={user} /> : ''} />
+            <Route path="find-student" element={type === "teacher" ? <FindStudent classs={classs} setClasss={setClasss} group={group} setGroup={setGroup} roll={roll} setRoll={setRoll} setProfile={setProfile} /> : ''} />
+            <Route path="student-profile" element={type === "teacher" ? <StudentProfile profile={profile} feedback={feedback} setFeedback={setFeedback} user={user} /> : ''} />
+            <Route path="attendance" element={type === "teacher" ? <Attendance classs={classs} setClasss={setClasss} group={group} setGroup={setGroup} /> : ''} />
+            <Route path="take-attendance" element={type === "teacher" ? <TakeAttendance classs={classs} group={group} /> : ''} />
+            <Route path="publish-result" element={type === "teacher" ? <PublishResult classs={classs} setClasss={setClasss} group={group} setGroup={setGroup} subject={subject} setSubject={setSubject} /> : ''} />
+            <Route path="publish-result-2" element={type === "teacher" ? <PublishResult2 classs={classs} group={group} subject={subject} /> : ''} />
+            <Route path="subject" element={type === "teacher" ? <Subject user={user} /> : ''} />
           </Route>
         </Routes>
       </BrowserRouter>

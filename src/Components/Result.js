@@ -43,10 +43,9 @@ function Result(props) {
             </tr>
             <tr style={{ display: `${classs === 10 || classs === 12 ? "" : "none"}` }}>
               <th>Subject</th>
-              <th>CT1</th>
-              <th>Half Yearly</th>
-              <th>CT2</th>
-              <th>Final</th>
+              <th>CT</th>
+              <th>Pretest</th>
+              <th>Test</th>
             </tr>
           </thead>
           <tbody>
@@ -56,7 +55,7 @@ function Result(props) {
                   <td>{e.subject}</td>
                   <td>{e.CT1}</td>
                   <td>{e.mid}</td>
-                  <td>{e.CT2}</td>
+                  <td style={{ display: `${classs === 9 || classs === 11 ? "" : "none"}` }}>{e.CT2}</td>
                   <td>{e.final}</td>
                 </tr>
               )

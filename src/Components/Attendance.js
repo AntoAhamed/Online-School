@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 function Attendance(props) {
   const navigate = useNavigate()
-  
+
   async function submit(e) {
     e.preventDefault();
 

@@ -42,6 +42,7 @@ function Take_Attendance(props) {
                 .then(res => {
                     if (res.data === "success") {
                         alert("Attendance given successfully");
+                        setData({ ...data, selectedRadioInput: '' });
                     }
                     else {
                         alert("You can't give attendance to a student twice in a day!");

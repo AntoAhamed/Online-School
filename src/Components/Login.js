@@ -1,24 +1,22 @@
 import React, { useState } from 'react'
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 function Login(props) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const navigate = useNavigate()
 
   async function login(e) {
     e.preventDefault();
 
     let tmp = username;
 
-    if(tmp[0]==='s'){
+    if (tmp[0] === 's') {
       props.setType("student");
     }
-    if(tmp[0]==='p'){
+    if (tmp[0] === 'p') {
       props.setType("parent");
     }
-    if(tmp[0]==='t'){
+    if (tmp[0] === 't') {
       props.setType("teacher");
     }
 
@@ -75,7 +73,7 @@ function Login(props) {
         <div className='col'>
           <form action='' method='' className='login-form'>
             <div className="mb-3">
-              <label htmlFor="username" className="form-label">Username</label>
+              <label htmlFor="username" className="form-label">UserID</label>
               <input type="text" className="form-control" value={username} onChange={(e) => { setUsername(e.target.value) }} id="username" placeholder="" />
             </div>
             <div className="mb-3">

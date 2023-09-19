@@ -112,7 +112,6 @@ app.post('/login', async (req, res) => {
         }
 
         check = await STUDENTS.findOne(data);
-        console.log(check);
     }
 
     if (type === "parent") {
@@ -124,7 +123,6 @@ app.post('/login', async (req, res) => {
         }
 
         check = await STUDENTS.findOne(data);
-        console.log(check);
     }
 
     if (type === "teacher") {
@@ -136,7 +134,6 @@ app.post('/login', async (req, res) => {
         }
 
         check = await TEACHERS.findOne(data);
-        console.log(check);
     }
 
     try {
@@ -181,7 +178,6 @@ app.post('/get_routine', async (req, res) => {
     const d = new Date();
 
     let day = d.getDay();
-    console.log(day)
 
     let today;
 
@@ -206,13 +202,11 @@ app.post('/get_routine', async (req, res) => {
             break;
     }
 
-    console.log(classs, group, today);
     const check = await ROUTINES.find({ class: classs, group: group, day: today });
 
     try {
         if (check) {
             res.send({ data: check });
-            console.log(check.length);
         }
         else {
             res.json("failed");
@@ -223,17 +217,15 @@ app.post('/get_routine', async (req, res) => {
     }
 })
 
+//api to get student
 app.post('/student_profile', async (req, res) => {
     const { classs, group, roll } = req.body;
-
-    console.log(classs, group, roll)
 
     const check = await STUDENTS.findOne({ class: classs, group: group, roll: roll });
 
     try {
         if (check) {
             res.send({ data: check });
-            console.log(check);
         }
         else {
             res.json("failed");
@@ -276,13 +268,11 @@ app.post('/get_subjects', async (req, res) => {
             break;
     }
 
-    console.log(name, today);
     const check = await ROUTINES.find({ teacher: name, day: today });
 
     try {
         if (check) {
             res.send({ data: check });
-            console.log(check.length);
         }
         else {
             res.json("something wrong!");
@@ -293,16 +283,15 @@ app.post('/get_subjects', async (req, res) => {
     }
 })
 
+//api to get students
 app.post('/get_students', async (req, res) => {
     const { classs, group } = req.body;
 
     const check = await STUDENTS.find({ class: classs, group: group });
-    console.log(classs, group);
 
     try {
         if (check) {
             res.send({ data: check });
-            console.log(check);
         }
         else {
             res.json("failed");
@@ -313,10 +302,9 @@ app.post('/get_students', async (req, res) => {
     }
 })
 
+//api to publish result
 app.post('/publish_result', async (req, res) => {
     const { classs, group, roll, subject, CT1, mid, CT2, final } = req.body;
-
-    console.log(classs, group, roll, subject, CT1, mid, CT2, final)
 
     const data = {
         class: classs,
@@ -345,6 +333,7 @@ app.post('/publish_result', async (req, res) => {
     }
 })
 
+//api to get results
 app.post('/get_result', async (req, res) => {
     const { classs, group, roll } = req.body;
 
@@ -353,7 +342,6 @@ app.post('/get_result', async (req, res) => {
     try {
         if (check) {
             res.send({ data: check });
-            console.log(check.length);
         }
     }
     catch (e) {
@@ -361,10 +349,9 @@ app.post('/get_result', async (req, res) => {
     }
 })
 
+//api to post feedback
 app.post('/post_feedback', async (req, res) => {
     const { classs, group, roll, feedback, T_name, T_contact, T_email } = req.body;
-
-    console.log(T_contact);
 
     const data = {
         class: classs,
@@ -385,6 +372,7 @@ app.post('/post_feedback', async (req, res) => {
     }
 })
 
+//api to get feedbacks
 app.post('/get_feedbacks', async (req, res) => {
     const { classs, group, roll } = req.body;
 
@@ -393,7 +381,6 @@ app.post('/get_feedbacks', async (req, res) => {
     try {
         if (check) {
             res.send({ data: check });
-            console.log(check.length);
         }
     }
     catch (e) {
@@ -401,6 +388,7 @@ app.post('/get_feedbacks', async (req, res) => {
     }
 })
 
+//api to give attendance
 app.post('/attendance', async (req, res) => {
     const { classs, group, roll, value } = req.body;
 
@@ -424,19 +412,19 @@ app.post('/attendance', async (req, res) => {
     var absent = student.absent;
 
     try {
-        if(!check){
+        if (!check) {
             total++;
-            if(value==="present"){
+            if (value === "present") {
                 present++;
             }
-            if(value==="absent"){
+            if (value === "absent") {
                 absent++;
             }
             await ATTENDANCE.insertMany([data]);
             await STUDENTS.updateOne({ class: classs, group: group, roll: roll }, { $set: { total: total, present: present, absent: absent } });
             res.json("success");
         }
-        else{
+        else {
             res.json("failed");
         }
     }
@@ -445,7 +433,7 @@ app.post('/attendance', async (req, res) => {
     }
 })
 
-
+//write next apis from here...
 
 //START THE SERVER
 app.listen(port, () => {
