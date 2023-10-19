@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function Student_Profile(props) {
+    const navigate = useNavigate()
     const classs = props.profile?.class;
     const group = props.profile?.group;
     const roll = props.profile?.roll;
@@ -9,6 +11,8 @@ function Student_Profile(props) {
     const T_name = props.user?.name;
     const T_contact = props.user?.contact;
     const T_email = props.user?.email;
+
+    const [feedbacks, setFeedbacks] = useState([])
 
     console.log(T_contact);
 
@@ -32,6 +36,25 @@ function Student_Profile(props) {
         }
     }
 
+    const getFeedbacks = () => {
+        axios.post('http://localhost:8000/get_teacher_feedbacks', { classs, group, roll, T_name })
+            .then(res => {
+                const data = res.data;
+                console.log("Data has been received successfully");
+                setFeedbacks(data.data);
+                console.log(feedbacks);
+                //setReplies(feedbacks[0].reply[0])
+                //console.log(replies);
+            }).catch(e => {
+                console.log(e);
+            });
+    }
+
+    useEffect(() => {
+        getFeedbacks();
+        // eslint-disable-next-line
+    }, [])
+
     return (
         <div>
             <div className='p-2 m-2'>
@@ -51,6 +74,35 @@ function Student_Profile(props) {
                     <textarea className="form-control" value={props.feedback} onChange={(e) => { props.setFeedback(e.target.value) }} id="exampleFormControlTextarea1" rows="5" placeholder='Enter feedback here'></textarea>
                     <button type="submit" onClick={submit} class="btn btn-primary mt-2">Submit</button>
                 </div>
+            </div>
+            <div className='p-2 m-2'>
+                {feedbacks.length === 0 ? "No feedbacks" : feedbacks.map((e) => {
+                    return (
+                        <div class="col-sm mb-3" key={e._id}>
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Teacher: {e.name}</h5>
+                                    <p class="card-text">Feedback: {e.feedback}</p> {console.log(e.feedback)}
+                                    <p class="card-text text-body-secondary">Contact: {e.contact} || Email: {e.email}</p>
+                                </div>
+                                <div>
+                                    {e.reply.length === 0 ? "No feedbacks" : e.reply.map((item, index) => {
+                                        return (
+                                            <div class="col-sm m-4" key={index}>
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">Reply by {name}'s parent</h5>
+                                                        <p class="card-text">Reply: {item}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                            </div>
+                        </div>
+                    )
+                })}
             </div>
         </div>
     )

@@ -5,7 +5,7 @@ function Take_Attendance(props) {
     const [data, setData] = useState({
         value1: 'absent',
         value2: 'present',
-        selectedRadioInput: ''
+        selectedRadioInput: "absent"
     });
 
     const handleChange = (e) => {
@@ -93,6 +93,7 @@ function Take_Attendance(props) {
                                                 className="toggle_option"
                                                 id="first-toggle"
                                                 name="toggle_option"
+                                                checked
                                             />
                                             <span>Absent</span>
 

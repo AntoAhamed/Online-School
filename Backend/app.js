@@ -79,7 +79,8 @@ const feedbackSchema = new mongoose.Schema({
     feedback: { type: String },
     name: { type: String },
     contact: { type: String },
-    email: { type: String }
+    email: { type: String },
+    reply: [{ type: String }]
 });
 
 const FEEDBACK = mongoose.model('feedbacks', feedbackSchema);
@@ -388,6 +389,22 @@ app.post('/get_feedbacks', async (req, res) => {
     }
 })
 
+//api to get teachers feedbacks
+app.post('/get_teacher_feedbacks', async (req, res) => {
+    const { classs, group, roll, T_name } = req.body;
+
+    const check = await FEEDBACK.find({ class: classs, group: group, roll: roll, name: T_name });
+
+    try {
+        if (check) {
+            res.send({ data: check });
+        }
+    }
+    catch (e) {
+        console.log(e);
+    }
+})
+
 //api to give attendance
 app.post('/attendance', async (req, res) => {
     const { classs, group, roll, value } = req.body;
@@ -433,7 +450,29 @@ app.post('/attendance', async (req, res) => {
     }
 })
 
+//api to post reply
+app.post('/setreply', async (req, res) => {
+    const { id, reply } = req.body;
+
+    let feedback = await FEEDBACK.findOne({ _id: id })
+
+    var allReply = feedback.reply
+    allReply.push(reply)
+
+    console.log(reply)
+    console.log(allReply)
+
+    try {
+        await FEEDBACK.updateOne({ _id: id }, { $set: { reply: allReply } });
+        res.json("success");
+    }
+    catch (e) {
+        console.log(e);
+    }
+})
+
 //write next apis from here...
+
 
 //START THE SERVER
 app.listen(port, () => {

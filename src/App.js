@@ -13,6 +13,7 @@ import TakeAttendance from './Components/Take_Attendance';
 import PublishResult from './Components/Publish_Result'
 import PublishResult2 from './Components/Publish_Result_2';
 import Subject from './Components/Subject'
+import Reply from './Components/Reply';
 import { useState } from 'react';
 
 function App() {
@@ -59,6 +60,7 @@ function App() {
             <Route path="publish-result" element={type === "teacher" ? <PublishResult classs={classs} setClasss={setClasss} group={group} setGroup={setGroup} subject={subject} setSubject={setSubject} /> : ''} />
             <Route path="publish-result-2" element={type === "teacher" ? <PublishResult2 classs={classs} group={group} subject={subject} /> : ''} />
             <Route path="subject" element={type === "teacher" ? <Subject user={user} /> : ''} />
+            <Route path="reply" element={type === "parent" ? <Reply user={user} /> : ''} />
           </Route>
         </Routes>
       </BrowserRouter>
