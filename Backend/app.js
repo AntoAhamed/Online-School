@@ -305,12 +305,12 @@ app.post('/get_students', async (req, res) => {
 
 //api to publish result
 app.post('/publish_result', async (req, res) => {
-    const { classs, group, roll, subject, CT1, mid, CT2, final } = req.body;
+    const { classs, group, tmpRoll, subject, CT1, mid, CT2, final } = req.body;
 
     const data = {
         class: classs,
         group: group,
-        roll: roll,
+        roll: tmpRoll,
         subject: subject,
         CT1: CT1,
         mid: mid,
@@ -318,7 +318,7 @@ app.post('/publish_result', async (req, res) => {
         final: final
     }
 
-    const check = await RESULT.findOne({ class: classs, group: group, roll: roll, subject: subject });
+    const check = await RESULT.findOne({ class: classs, group: group, roll: tmpRoll, subject: subject });
 
     try {
         if (check) {
@@ -472,6 +472,25 @@ app.post('/setreply', async (req, res) => {
 })
 
 //write next apis from here...
+
+//api to get result of student for teacher
+app.post('/get_result_for_teacher', async (req, res) => {
+    const { classs, group, tmpRoll, subject } = req.body;
+
+    const check = await RESULT.findOne({ class: classs, group: group, roll: tmpRoll, subject: subject });
+
+    try {
+        if (check) {
+            res.send({ data: check });
+        }else{
+            res.json("failed");
+        }
+    }
+    catch (e) {
+        console.log(e);
+    }
+})
+
 
 
 //START THE SERVER

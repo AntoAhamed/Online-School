@@ -12,6 +12,7 @@ import Attendance from './Components/Attendance';
 import TakeAttendance from './Components/Take_Attendance';
 import PublishResult from './Components/Publish_Result'
 import PublishResult2 from './Components/Publish_Result_2';
+import PublishResult3 from './Components/Publish_Result_3';
 import Subject from './Components/Subject'
 import Reply from './Components/Reply';
 import { useState } from 'react';
@@ -24,9 +25,13 @@ function App() {
 
   //teacher
   const [classs, setClasss] = useState('')
+  console.log(classs)
   const [group, setGroup] = useState('')
+  console.log(group)
   const [roll, setRoll] = useState('')
+  console.log(roll)
   const [subject, setSubject] = useState('')
+  console.log(subject)
   const [profile, setProfile] = useState({})
   const [feedback, setFeedback] = useState('')
 
@@ -59,6 +64,7 @@ function App() {
             <Route path="take-attendance" element={type === "teacher" ? <TakeAttendance classs={classs} group={group} /> : ''} />
             <Route path="publish-result" element={type === "teacher" ? <PublishResult classs={classs} setClasss={setClasss} group={group} setGroup={setGroup} subject={subject} setSubject={setSubject} /> : ''} />
             <Route path="publish-result-2" element={type === "teacher" ? <PublishResult2 classs={classs} group={group} subject={subject} /> : ''} />
+            <Route path="publish-result-3" element={type === "teacher" ? <PublishResult3 classs={classs} group={group} subject={subject} roll={roll} /> : ''} />
             <Route path="subject" element={type === "teacher" ? <Subject user={user} /> : ''} />
             <Route path="reply" element={type === "parent" ? <Reply user={user} /> : ''} />
           </Route>

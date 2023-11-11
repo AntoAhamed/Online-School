@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function Publish_Result_2(props) {
+    const navigate = useNavigate();
     const [students, setStudents] = useState([]);
     const { classs, group, subject } = props;
 
-    const [CT1, setCT1] = useState('')
-    const [CT2, setCT2] = useState('')
-    const [mid, setMid] = useState('')
-    const [final, setFinal] = useState('')
-
-    const getStudents = () => {
+    const getStudents = async () => {
         axios.post('http://localhost:8000/get_students', { classs, group })
             .then(res => {
                 if (res.data === "failed") {
@@ -27,32 +24,9 @@ function Publish_Result_2(props) {
             });
     }
 
-    function submit(e) {
-        console.log(classs)
-        const roll = e;
-        console.log(roll)
-        console.log(final)
-
-        if (CT1 !== '' && mid !== '' && final !== '') {
-            axios.post('http://localhost:8000/publish_result', { classs, group, roll, subject, CT1, mid, CT2, final })
-                .then(res => {
-                    if (res.data === "success") {
-                        alert("Published");
-                        setCT1('')
-                        setCT2('')
-                        setMid('')
-                        setFinal('')
-                    }
-                    else {
-                        alert("You can't publish a given result twice!");
-                    }
-                }).catch(e => {
-                    console.log(e);
-                });
-        }
-        else {
-            alert("Empty field can't be publushed!");
-        }
+    function addResult(e) {
+        const tmpRoll = e;
+        navigate("/publish-result-3", { state: { classs, group, tmpRoll, subject } })
     }
 
     useEffect(() => {
@@ -74,11 +48,11 @@ function Publish_Result_2(props) {
                         <tr>
                             <th>Roll</th>
                             <th>Name</th>
-                            <th>CT1</th>
-                            <th>Half Yearly/Pretest</th>
-                            <th>CT2</th>
-                            <th>Final/Test</th>
-                            <th>Submit</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>Add Result</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -88,19 +62,15 @@ function Publish_Result_2(props) {
                                     <td>{e.roll}</td>
                                     <td>{e.name}</td>
                                     <td>
-                                        <input type="number" className="form-control" value={CT1} onChange={(e) => { setCT1(e.target.value) }} id="username" placeholder="" />
                                     </td>
                                     <td>
-                                        <input type="number" className="form-control" value={mid} onChange={(e) => { setMid(e.target.value) }} id="username" placeholder="" />
                                     </td>
                                     <td style={{ display: `${classs !== 9 || classs !== 11 ? "" : "none"}` }}>
-                                        <input type="number" className="form-control" value={CT2} onChange={(e) => { setCT2(e.target.value) }} id="username" placeholder="" />
                                     </td>
                                     <td>
-                                        <input type="number" className="form-control" value={final} onChange={(e) => { setFinal(e.target.value) }} id="username" placeholder="" />
                                     </td>
                                     <td>
-                                        <button onClick={() => submit(e.roll)} className="btn btn-primary">Submit</button>
+                                        <button onClick={() => addResult(e.roll)} className="btn btn-primary">Add Result</button>
                                     </td>
                                 </tr>
                             )

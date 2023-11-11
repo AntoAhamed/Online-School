@@ -53,7 +53,7 @@ function Find_Student(props) {
           <form action='' method='' className='login-form'>
             <div className="mb-3">
               <label htmlFor="class" className="form-label">Class</label>
-              <input type="number" className="form-control" value={props.classs} onChange={(e) => { props.setClasss(e.target.value) }} id="class" min={9} max={12} placeholder="9/10/11/12" />
+              <input type="number" className="form-control" value={props.classs} onChange={(e) => { props.setClasss(e.target.value) }} id="class" min="9" max="12" placeholder="9/10/11/12" />
             </div>
             <div className="mb-3">
               <label htmlFor="group" className="form-label">Group</label>

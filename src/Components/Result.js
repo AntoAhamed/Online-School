@@ -7,7 +7,7 @@ function Result(props) {
   const group = props.user?.group;
   const roll = props.user?.roll;
 
-  const getResults = () => {
+  const getResults = async () => {
     axios.post('http://localhost:8000/get_result', { classs, group, roll })
       .then(res => {
         const data = res.data;
