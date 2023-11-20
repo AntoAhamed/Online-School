@@ -36,16 +36,24 @@ function Result(props) {
           <thead class="table-dark">
             <tr style={{ display: `${classs === 9 || classs === 11 ? "" : "none"}` }}>
               <th>Subject</th>
-              <th>CT1</th>
-              <th>Half Yearly</th>
-              <th>CT2</th>
-              <th>Final</th>
+              <th>CT1(20)</th>
+              <th>Half Yearly(80)</th>
+              <th>Total(100)</th>
+              <th>GPA(4)</th>
+              <th>CT2(20)</th>
+              <th>Final(80)</th>
+              <th>Total(100)</th>
+              <th>GPA(4)</th>
             </tr>
             <tr style={{ display: `${classs === 10 || classs === 12 ? "" : "none"}` }}>
               <th>Subject</th>
-              <th>CT</th>
-              <th>Pretest</th>
-              <th>Test</th>
+              <th>CT(20)</th>
+              <th>Pretest(80)</th>
+              <th>Total(100)</th>
+              <th>GPA(4)</th>
+              <th>Test(100)</th>
+              <th>Total(100)</th>
+              <th>GPA(4)</th>
             </tr>
           </thead>
           <tbody>
@@ -55,15 +63,30 @@ function Result(props) {
                   <td>{e.subject}</td>
                   <td>{e.CT1}</td>
                   <td>{e.mid}</td>
+                  <td>{e.CT1 + e.mid}</td>
+                  <td>4.00</td>
                   <td style={{ display: `${classs === 9 || classs === 11 ? "" : "none"}` }}>{e.CT2}</td>
                   <td>{e.final}</td>
+                  <td>{e.CT2 + e.final}</td>
+                  <td>4.00</td>
                 </tr>
               )
             })}
+            <tr>
+              <td></td>
+              <td></td>
+              <td>Total & CGPA</td>
+              <td>247</td>
+              <td>4.00</td>
+              <td style={{ display: `${classs === 9 || classs === 11 ? "" : "none"}` }}></td>
+              <td>Total & CGPA</td>
+              <td>250</td>
+              <td>4.00</td>
+            </tr>
           </tbody>
         </table>
       </div>
-    </div>
+    </div >
   )
 }
 

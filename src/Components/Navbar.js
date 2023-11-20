@@ -6,7 +6,7 @@ function Navbar(props) {
   return (
     <>
       <div>
-        <div className='p-4' style={{ textAlign: "center", fontSize: "60px", fontFamily: "Dancing Script", backgroundColor: "#4da9ff" }}>
+        <div className='p-4' style={{ textAlign: "center", fontSize: "60px", fontFamily: "Dancing Script", backgroundColor: "#99ceff" }}>
           <b><i>Welcome To The Future Way School & Collage</i></b>
         </div>
         <nav className="navbar navbar-expand-lg bg-success navbar-success">
@@ -27,6 +27,9 @@ function Navbar(props) {
                 <li className="nav-item" style={{ display: `${props.type === "student" ? '' : "none"}` }}>
                   <Link className="nav-link" to="/total-attendance">Total Attendance</Link>
                 </li>
+                <li className="nav-item" style={{ display: `${props.type === "student" ? '' : "none"}` }}>
+                  <Link className="nav-link" to="/profile">Profile</Link>
+                </li>
 
                 {/*for parents */}
                 <li className="nav-item" style={{ display: `${props.type === "parent" ? '' : "none"}` }}>
@@ -40,6 +43,9 @@ function Navbar(props) {
                 </li>
                 <li className="nav-item" style={{ display: `${props.type === "parent" ? '' : "none"}` }}>
                   <Link className="nav-link" to="/feedback">Feedbacks</Link>
+                </li>
+                <li className="nav-item" style={{ display: `${props.type === "parent" ? '' : "none"}` }}>
+                  <Link className="nav-link" to="/profile">Profile</Link>
                 </li>
 
                 {/*for teachers */}

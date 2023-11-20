@@ -8,6 +8,7 @@ import TotalAttendance from './Components/Total_Attendance'
 import Feedback from './Components/Feedback';
 import FindStudent from './Components/Find_Student';
 import StudentProfile from './Components/Student_Profile';
+import Profile from './Components/Profile';
 import Attendance from './Components/Attendance';
 import TakeAttendance from './Components/Take_Attendance';
 import PublishResult from './Components/Publish_Result'
@@ -54,7 +55,7 @@ function App() {
         <Routes>
           <Route path="/" element={!user._id ? <Login setUser={setUser} type={type} setType={setType} /> : <Navbar type={type} logout={logout} />}>
             <Route index element={!user._id ? <Login setUser={setUser} type={type} setType={setType} /> : ''} />
-            <Route path="class-routine" element={type === "student" || type === "parent" ? <ClassRoutine user={user} class={user.class} group={user.group} /> : ''} />
+            <Route path="class-routine" element={type === "student" || type === "parent" ? <ClassRoutine classs={user.class} group={user.group} /> : ''} />
             <Route path="result" element={type === "student" || type === "parent" ? <Result user={user} /> : ''} />
             <Route path="total-attendance" element={type === "student" || type === "parent" ? <TotalAttendance user={user} /> : ''} />
             <Route path="feedback" element={type === "parent" ? <Feedback user={user} /> : ''} />
@@ -67,6 +68,7 @@ function App() {
             <Route path="publish-result-3" element={type === "teacher" ? <PublishResult3 classs={classs} group={group} subject={subject} roll={roll} /> : ''} />
             <Route path="subject" element={type === "teacher" ? <Subject user={user} /> : ''} />
             <Route path="reply" element={type === "parent" ? <Reply user={user} /> : ''} />
+            <Route path="profile" element={type === "student" || type === "parent" ? <Profile user={user} /> : ''} />
           </Route>
         </Routes>
       </BrowserRouter>

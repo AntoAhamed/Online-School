@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import img from '../Assets/user.png'
 
 function Student_Profile(props) {
     const navigate = useNavigate()
@@ -61,21 +62,28 @@ function Student_Profile(props) {
                 <p className='p-1 m-1' style={{ textAlign: "center", fontSize: "30px", fontFamily: "Dancing Script" }}><b><i><u>Profile Of {props.profile?.name}</u></i></b></p>
             </div>
             <div className=' container p-2 m-2'>
-                <p className='' style={{ fontSize: "20px", fontFamily: "Dancing Script", padding: "1% 0% 0% 10%" }}><b><i>Name: {props.profile?.name}</i></b></p>
-                <p className='' style={{ fontSize: "20px", fontFamily: "Dancing Script", padding: "1% 0% 0% 10%" }}><b><i>Roll: {props.profile?.roll}</i></b></p>
-                <p className='' style={{ fontSize: "20px", fontFamily: "Dancing Script", padding: "1% 0% 0% 10%" }}><b><i>Class: {props.profile?.class}</i></b></p>
-                <p className='' style={{ fontSize: "20px", fontFamily: "Dancing Script", padding: "1% 0% 0% 10%" }}><b><i>Group: {props.profile?.group}</i></b></p>
-                <p className='' style={{ fontSize: "20px", fontFamily: "Dancing Script", padding: "1% 0% 0% 10%" }}><b><i>Father: {props.profile?.father}</i></b></p>
-                <p className='' style={{ fontSize: "20px", fontFamily: "Dancing Script", padding: "1% 0% 0% 10%" }}><b><i>Mother: {props.profile?.mother}</i></b></p>
-                <p className='' style={{ fontSize: "20px", fontFamily: "Dancing Script", padding: "1% 0% 0% 10%" }}><b><i>Contact: {props.profile?.contact}</i></b></p>
-                <p className='' style={{ fontSize: "20px", fontFamily: "Dancing Script", padding: "1% 0% 0% 10%" }}><b><i>Email: {props.profile?.email}</i></b></p>
+                <div className='d-flex justify-content-around p-3' style={{border: "1px solid black", borderRadius: "10px" ,marginLeft: "9%"}}>
+                    <div>
+                        <p className='' style={{ fontSize: "20px", fontFamily: "Dancing Script" }}><b><i>Name: {props.profile?.name}</i></b></p>
+                        <p className='' style={{ fontSize: "20px", fontFamily: "Dancing Script" }}><b><i>Roll: {props.profile?.roll}</i></b></p>
+                        <p className='' style={{ fontSize: "20px", fontFamily: "Dancing Script" }}><b><i>Class: {props.profile?.class}</i></b></p>
+                        <p className='' style={{ fontSize: "20px", fontFamily: "Dancing Script" }}><b><i>Group: {props.profile?.group}</i></b></p>
+                        <p className='' style={{ fontSize: "20px", fontFamily: "Dancing Script" }}><b><i>Father: {props.profile?.father}</i></b></p>
+                        <p className='' style={{ fontSize: "20px", fontFamily: "Dancing Script" }}><b><i>Mother: {props.profile?.mother}</i></b></p>
+                        <p className='' style={{ fontSize: "20px", fontFamily: "Dancing Script" }}><b><i>Contact: {props.profile?.contact}</i></b></p>
+                        <p className='' style={{ fontSize: "20px", fontFamily: "Dancing Script" }}><b><i>Email: {props.profile?.email}</i></b></p>
+                    </div>
+                    <div>
+                        <img src={img} alt='' width='180px' height='180px' />
+                    </div>
+                </div>
                 <div className='mb-3' style={{ fontSize: "20px", fontFamily: "Dancing Script", padding: "2% 0% 0% 10%" }}>
                     <p className=''><b><i>Feedback: </i></b></p>
                     <textarea className="form-control" value={props.feedback} onChange={(e) => { props.setFeedback(e.target.value) }} id="exampleFormControlTextarea1" rows="5" placeholder='Enter feedback here'></textarea>
                     <button type="submit" onClick={submit} class="btn btn-primary mt-2">Submit</button>
                 </div>
             </div>
-            <div className='p-2 m-2'>
+            <div className='p-2' style={{marginLeft: "9%", marginRight: "10%"}}>
                 {feedbacks.length === 0 ? "No feedbacks" : feedbacks.map((e) => {
                     return (
                         <div class="col-sm mb-3" key={e._id}>
