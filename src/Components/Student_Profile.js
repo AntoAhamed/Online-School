@@ -62,7 +62,7 @@ function Student_Profile(props) {
                 <p className='p-1 m-1' style={{ textAlign: "center", fontSize: "30px", fontFamily: "Dancing Script" }}><b><i><u>Profile Of {props.profile?.name}</u></i></b></p>
             </div>
             <div className=' container p-2 m-2'>
-                <div className='d-flex justify-content-around p-3' style={{border: "1px solid black", borderRadius: "10px" ,marginLeft: "9%"}}>
+                <div className='d-flex justify-content-around p-3' style={{ borderRadius: "10px", marginLeft: "9%", backgroundColor: "white", boxShadow: "5px 12px 5px lightblue" }}>
                     <div>
                         <p className='' style={{ fontSize: "20px", fontFamily: "Dancing Script" }}><b><i>Name: {props.profile?.name}</i></b></p>
                         <p className='' style={{ fontSize: "20px", fontFamily: "Dancing Script" }}><b><i>Roll: {props.profile?.roll}</i></b></p>

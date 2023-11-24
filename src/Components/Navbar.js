@@ -30,6 +30,9 @@ function Navbar(props) {
                 <li className="nav-item" style={{ display: `${props.type === "student" ? '' : "none"}` }}>
                   <Link className="nav-link" to="/profile">Profile</Link>
                 </li>
+                <li className="nav-item" style={{ display: `${props.type === "student" ? '' : "none"}` }}>
+                  <Link className="nav-link" to="/online-payment">Payment</Link>
+                </li>
 
                 {/*for parents */}
                 <li className="nav-item" style={{ display: `${props.type === "parent" ? '' : "none"}` }}>
@@ -46,6 +49,9 @@ function Navbar(props) {
                 </li>
                 <li className="nav-item" style={{ display: `${props.type === "parent" ? '' : "none"}` }}>
                   <Link className="nav-link" to="/profile">Profile</Link>
+                </li>
+                <li className="nav-item" style={{ display: `${props.type === "parent" ? '' : "none"}` }}>
+                  <Link className="nav-link" to="/online-payment">Payment</Link>
                 </li>
 
                 {/*for teachers */}

@@ -19,11 +19,11 @@ function Class_Routine(props) {
         {classs==9&&group=="science"?
         <img src={s9} alt='' className='mb-4' width={"80%"} />:''}
         {classs==10&&group=="science"?
-        <img src={s10} alt='' className='mb-4' />:''}
+        <img src={s10} alt='' className='mb-4' width={"80%"} />:''}
         {classs==9&&group=="commerce"?
-        <img src={c9} alt='' className='mb-4' />:''}
+        <img src={c9} alt='' className='mb-4' width={"80%"} />:''}
         {classs==10&&group=="commerce"?
-        <img src={c10} alt='' className='mb-4' />:''}
+        <img src={c10} alt='' className='mb-4' width={"80%"} />:''}
       </div>
     </div>
   )

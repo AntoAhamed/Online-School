@@ -16,6 +16,7 @@ import PublishResult2 from './Components/Publish_Result_2';
 import PublishResult3 from './Components/Publish_Result_3';
 import Subject from './Components/Subject'
 import Reply from './Components/Reply';
+import OnlinePayment from './Components/Online_Payment';
 import { useState } from 'react';
 
 function App() {
@@ -69,6 +70,7 @@ function App() {
             <Route path="subject" element={type === "teacher" ? <Subject user={user} /> : ''} />
             <Route path="reply" element={type === "parent" ? <Reply user={user} /> : ''} />
             <Route path="profile" element={type === "student" || type === "parent" ? <Profile user={user} /> : ''} />
+            <Route path="online-payment" element={type === "student" || type === "parent" ? <OnlinePayment /> : ''} />
           </Route>
         </Routes>
       </BrowserRouter>
