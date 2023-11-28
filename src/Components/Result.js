@@ -7,6 +7,8 @@ function Result(props) {
   const group = props.user?.group;
   const roll = props.user?.roll;
 
+  let midTotal, finalTotal, midcg, finalcg, total1, total2, cg1, cg2;
+
   const getResults = async () => {
     axios.post('http://localhost:8000/get_result', { classs, group, roll })
       .then(res => {
@@ -22,6 +24,8 @@ function Result(props) {
   useEffect(() => {
     getResults();
   }, [])
+
+  total1 = total2 = cg1 = cg2 = 0
 
   return (
     <div>
@@ -58,17 +62,54 @@ function Result(props) {
           </thead>
           <tbody>
             {result.length === 0 ? "No result to show" : result.map((e) => {
+              midTotal = e.CT1 + e.mid;
+              finalTotal = e.CT2 + e.final;
+              total1 += midTotal;
+              total2 += finalTotal;
+
+              if (midTotal >= 100 && midTotal <= 80) {
+                midcg = "A+";
+              } else if (midTotal >= 79 && midTotal <= 70) {
+                midcg = "A";
+              } else if (midTotal >= 69 && midTotal <= 60) {
+                midcg = "A-";
+              } else if (midTotal >= 59 && midTotal <= 50) {
+                midcg = "B";
+              } else if (midTotal >= 49 && midTotal <= 45) {
+                midcg = "C";
+              } else if (midTotal >= 44 && midTotal <= 40) {
+                midcg = "D";
+              } else {
+                midcg = "F";
+              }
+
+              if (finalTotal >= 100 && finalTotal <= 80) {
+                finalcg = "A+";
+              } else if (finalTotal >= 79 && finalTotal <= 70) {
+                finalcg = "A";
+              } else if (finalTotal >= 69 && finalTotal <= 60) {
+                finalcg = "A-";
+              } else if (finalTotal >= 59 && finalTotal <= 50) {
+                finalcg = "B";
+              } else if (finalTotal >= 49 && finalTotal <= 45) {
+                finalcg = "C";
+              } else if (finalTotal >= 44 && finalTotal <= 40) {
+                finalcg = "D";
+              } else {
+                finalcg = "F";
+              }
+
               return (
                 <tr key={e._id}>
                   <td>{e.subject}</td>
                   <td>{e.CT1}</td>
                   <td>{e.mid}</td>
-                  <td>{e.CT1 + e.mid}</td>
-                  <td>4.00</td>
+                  <td>{midTotal}</td>
+                  <td>{midcg}</td>
                   <td style={{ display: `${classs === 9 || classs === 11 ? "" : "none"}` }}>{e.CT2}</td>
                   <td>{e.final}</td>
-                  <td>{e.CT2 + e.final}</td>
-                  <td>4.00</td>
+                  <td>{finalTotal}</td>
+                  <td>{finalcg}</td>
                 </tr>
               )
             })}
@@ -76,12 +117,12 @@ function Result(props) {
               <td></td>
               <td></td>
               <td>Total & CGPA</td>
-              <td>247</td>
-              <td>4.00</td>
+              <td>{total1}</td>
+              <td>{cg1}</td>
               <td style={{ display: `${classs === 9 || classs === 11 ? "" : "none"}` }}></td>
               <td>Total & CGPA</td>
-              <td>250</td>
-              <td>4.00</td>
+              <td>{total2}</td>
+              <td>{cg2}</td>
             </tr>
           </tbody>
         </table>

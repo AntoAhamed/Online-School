@@ -307,15 +307,30 @@ app.post('/get_students', async (req, res) => {
 app.post('/publish_result', async (req, res) => {
     const { classs, group, tmpRoll, subject, CT1, mid, CT2, final } = req.body;
 
-    const data = {
-        class: classs,
-        group: group,
-        roll: tmpRoll,
-        subject: subject,
-        CT1: CT1,
-        mid: mid,
-        CT2: CT2,
-        final: final
+    let data;
+
+    if(classs==10){
+        data = {
+            class: classs,
+            group: group,
+            roll: tmpRoll,
+            subject: subject,
+            CT1: CT1,
+            mid: mid,
+            CT2: 0,
+            final: final
+        }
+    }else{
+        data = {
+            class: classs,
+            group: group,
+            roll: tmpRoll,
+            subject: subject,
+            CT1: CT1,
+            mid: mid,
+            CT2: CT2,
+            final: final
+        }
     }
 
     const check = await RESULT.findOne({ class: classs, group: group, roll: tmpRoll, subject: subject });
