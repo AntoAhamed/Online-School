@@ -59,26 +59,26 @@ function Student_Profile(props) {
     return (
         <div>
             <div className='p-2 m-2'>
-                <p className='p-1 m-1' style={{ textAlign: "center", fontSize: "30px", fontFamily: "Dancing Script" }}><b><i><u>Profile Of {props.profile?.name}</u></i></b></p>
+                <p className='p-1 m-1' style={{ textAlign: "center", fontSize: "35px" }}><b><u>Profile Of {props.profile?.name}</u></b></p>
             </div>
             <div className=' container p-2 m-2'>
                 <div className='d-flex justify-content-around p-3' style={{ borderRadius: "10px", marginLeft: "9%", backgroundColor: "white", boxShadow: "5px 12px 5px lightblue" }}>
                     <div>
-                        <p className='' style={{ fontSize: "20px", fontFamily: "Dancing Script" }}><b><i>Name: {props.profile?.name}</i></b></p>
-                        <p className='' style={{ fontSize: "20px", fontFamily: "Dancing Script" }}><b><i>Roll: {props.profile?.roll}</i></b></p>
-                        <p className='' style={{ fontSize: "20px", fontFamily: "Dancing Script" }}><b><i>Class: {props.profile?.class}</i></b></p>
-                        <p className='' style={{ fontSize: "20px", fontFamily: "Dancing Script" }}><b><i>Group: {props.profile?.group}</i></b></p>
-                        <p className='' style={{ fontSize: "20px", fontFamily: "Dancing Script" }}><b><i>Father: {props.profile?.father}</i></b></p>
-                        <p className='' style={{ fontSize: "20px", fontFamily: "Dancing Script" }}><b><i>Mother: {props.profile?.mother}</i></b></p>
-                        <p className='' style={{ fontSize: "20px", fontFamily: "Dancing Script" }}><b><i>Contact: {props.profile?.contact}</i></b></p>
-                        <p className='' style={{ fontSize: "20px", fontFamily: "Dancing Script" }}><b><i>Email: {props.profile?.email}</i></b></p>
+                        <p className='' style={{ fontSize: "25px", color: "black" }}><b>Name: {props.profile?.name}</b></p>
+                        <p className='' style={{ fontSize: "25px", color: "black" }}><b>Roll: {props.profile?.roll}</b></p>
+                        <p className='' style={{ fontSize: "25px", color: "black" }}><b>Class: {props.profile?.class}</b></p>
+                        <p className='' style={{ fontSize: "25px", color: "black" }}><b>Group: {props.profile?.group}</b></p>
+                        <p className='' style={{ fontSize: "25px", color: "black" }}><b>Father: {props.profile?.father}</b></p>
+                        <p className='' style={{ fontSize: "25px", color: "black" }}><b>Mother: {props.profile?.mother}</b></p>
+                        <p className='' style={{ fontSize: "25px", color: "black" }}><b>Contact: {props.profile?.contact}</b></p>
+                        <p className='' style={{ fontSize: "25px", color: "black" }}><b>Email: {props.profile?.email}</b></p>
                     </div>
                     <div>
                         <img src={img} alt='' width='180px' height='180px' />
                     </div>
                 </div>
                 <div className='mb-3' style={{ fontSize: "20px", fontFamily: "Dancing Script", padding: "2% 0% 0% 10%" }}>
-                    <p className=''><b><i>Feedback: </i></b></p>
+                    <p className=''><b>Feedback: </b></p>
                     <textarea className="form-control" value={props.feedback} onChange={(e) => { props.setFeedback(e.target.value) }} id="exampleFormControlTextarea1" rows="5" placeholder='Enter feedback here'></textarea>
                     <button type="submit" onClick={submit} class="btn btn-primary mt-2">Submit</button>
                 </div>
@@ -94,7 +94,7 @@ function Student_Profile(props) {
                                     <p class="card-text text-body-secondary">Contact: {e.contact} || Email: {e.email}</p>
                                 </div>
                                 <div>
-                                    {e.reply.length === 0 ? "No feedbacks" : e.reply.map((item, index) => {
+                                    {e.reply.length === 0 ? "No reply" : e.reply.map((item, index) => {
                                         return (
                                             <div class="col-sm m-4" key={index}>
                                                 <div class="card">

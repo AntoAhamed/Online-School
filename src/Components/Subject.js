@@ -24,7 +24,7 @@ function Subjects(props) {
   return (
     <div>
       <div className='p-2 m-2'>
-        <p className='p-1 m-1' style={{ textAlign: "center", fontSize: "30px", fontFamily: "Dancing Script" }}><b><i>Assigned Subjects To {name}</i></b></p>
+        <p className='p-1 m-1' style={{ textAlign: "center", fontSize: "35px" }}><b>Assigned Subjects To {name}</b></p>
       </div>
       <div className='p-2 m-2'>
         <table className="table p-1 m-1">

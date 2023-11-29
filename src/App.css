@@ -1,7 +1,17 @@
 body {
+  background-image: url("./Assets//bg.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
   background-color: #eef5ff;
+  color: white;
+  font-family: "Times New Roman", Times, serif
 }
 
 .App .login-form {
   padding: 2% 35% 2% 35%;
+}
+
+.App .teacher-form {
+  padding: 2% 55% 2% 15%;
 }

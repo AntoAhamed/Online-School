@@ -63,9 +63,9 @@ function Login(props) {
   }
 
   return (
-    <div className='container' style={{ marginTop: '10%', border: "1px solid #66a3ff", borderRadius: "5px", backgroundColor: "#66a3ff" }}>
+    <div className='container' style={{ marginTop: '10%', borderRadius: "5px" }}>
       <div className="row mb-3">
-        <div className="col" style={{ textAlign: "center", fontSize: "45px" }}>
+        <div className="col" style={{ textAlign: "center", fontSize: "50px" }}>
           <b>Login</b>
         </div>
       </div>

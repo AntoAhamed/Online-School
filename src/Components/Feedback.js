@@ -31,10 +31,10 @@ function Feedback(props) {
   return (
     <div>
       <div className='p-2 m-2'>
-        <p className='p-1 m-1' style={{ textAlign: "center", fontSize: "30px", fontFamily: "Dancing Script" }}><b><i>Feedback</i></b></p>
+        <p className='p-1 m-1' style={{ textAlign: "center", fontSize: "35px" }}><b>Feedback</b></p>
       </div>
       <div className='p-2 m-2'>
-        <p className='p-1 m-1' style={{ textAlign: "center", fontSize: "20px", fontFamily: "Dancing Script" }}><b><i><pre>Name: {name}                    Roll: {roll}                   Class: {classs}                    Group: {group}</pre></i></b></p>
+        <p className='p-1 m-1'><b><pre style={{ textAlign: "center", fontSize: "25px", fontFamily: "Times New Roman, Times, serif" }}>Name: {name}                    Roll: {roll}                   Class: {classs}                    Group: {group}</pre></b></p>
       </div>
       <div className='p-2 m-2'>
         {feedbacks.length === 0 ? "No feedbacks" : feedbacks.map((e) => {

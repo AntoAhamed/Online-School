@@ -54,15 +54,15 @@ function Publish_Result_3() {
 
     useEffect(() => {
         getStuResult();
-    },[])
+    }, [])
 
     return (
         <div>
             <div className='p-2 m-2'>
-                <p className='p-1 m-1' style={{ textAlign: "center", fontSize: "30px", fontFamily: "Dancing Script" }}><b><i>Publish Result</i></b></p>
+                <p className='p-1 m-1' style={{ textAlign: "center", fontSize: "35px" }}><b>Publish Result</b></p>
             </div>
             <div className='p-2 m-2'>
-                <p className='p-1 m-1' style={{ textAlign: "center", fontSize: "20px", fontFamily: "Dancing Script" }}><b><i><pre>Class: {classs}                     Group: {group}                     Subject: {subject}                     roll: {tmpRoll}</pre></i></b></p>
+                <p className='p-1 m-1'><b><pre style={{ textAlign: "center", fontSize: "20px" }}>Class: {classs}                     Group: {group}                     Subject: {subject}                     roll: {tmpRoll}</pre></b></p>
             </div>
             <div className='p-2 m-2'>
                 <table class="table p-1 m-1">

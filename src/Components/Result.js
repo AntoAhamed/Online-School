@@ -25,15 +25,15 @@ function Result(props) {
     getResults();
   }, [])
 
-  total1 = total2 = cg1 = cg2 = 0
+  midcg = finalcg = total1 = total2 = cg1 = cg2 = 0
 
   return (
     <div>
       <div className='p-2 m-2'>
-        <p className='p-1 m-1' style={{ textAlign: "center", fontSize: "30px", fontFamily: "Dancing Script" }}><b><i>Result</i></b></p>
+        <p className='p-1 m-1' style={{ textAlign: "center", fontSize: "35px" }}><b>Result</b></p>
       </div>
       <div className='p-2 m-2'>
-        <p className='p-1 m-1' style={{ textAlign: "center", fontSize: "20px", fontFamily: "Dancing Script" }}><b><i><pre>Name: {props.user?.name}                    Roll: {roll}                   Class: {classs}                    Group: {group}</pre></i></b></p>
+        <p className='p-1 m-1'><b><pre style={{ textAlign: "center", fontSize: "25px", fontFamily: "Times New Roman, Times, serif" }}>Name: {props.user?.name}                    Roll: {roll}                   Class: {classs}                    Group: {group}</pre></b></p>
       </div>
       <div className='p-2 m-2'>
         <table class="table p-1 m-1">
@@ -67,36 +67,50 @@ function Result(props) {
               total1 += midTotal;
               total2 += finalTotal;
 
-              if (midTotal >= 100 && midTotal <= 80) {
-                midcg = "A+";
-              } else if (midTotal >= 79 && midTotal <= 70) {
-                midcg = "A";
-              } else if (midTotal >= 69 && midTotal <= 60) {
-                midcg = "A-";
-              } else if (midTotal >= 59 && midTotal <= 50) {
-                midcg = "B";
-              } else if (midTotal >= 49 && midTotal <= 45) {
-                midcg = "C";
-              } else if (midTotal >= 44 && midTotal <= 40) {
-                midcg = "D";
+              if (midTotal <= 100 && midTotal >= 80) {
+                cg1 = 4.00;
+                midcg += cg1;
+              } else if (midTotal <= 79 && midTotal >= 70) {
+                cg1 = 3.75;
+                midcg += cg1;
+              } else if (midTotal <= 69 && midTotal >= 60) {
+                cg1 = 3.50;
+                midcg += cg1;
+              } else if (midTotal <= 59 && midTotal >= 50) {
+                cg1 = 3.00;
+                midcg += cg1;
+              } else if (midTotal <= 49 && midTotal >= 45) {
+                cg1 = 2.50;
+                midcg += cg1;
+              } else if (midTotal <= 44 && midTotal >= 40) {
+                cg1 = 2.00;
+                midcg += cg1;
               } else {
-                midcg = "F";
+                cg1 = 0.00;
+                midcg += cg1;
               }
 
-              if (finalTotal >= 100 && finalTotal <= 80) {
-                finalcg = "A+";
-              } else if (finalTotal >= 79 && finalTotal <= 70) {
-                finalcg = "A";
-              } else if (finalTotal >= 69 && finalTotal <= 60) {
-                finalcg = "A-";
-              } else if (finalTotal >= 59 && finalTotal <= 50) {
-                finalcg = "B";
-              } else if (finalTotal >= 49 && finalTotal <= 45) {
-                finalcg = "C";
-              } else if (finalTotal >= 44 && finalTotal <= 40) {
-                finalcg = "D";
+              if (finalTotal <= 100 && finalTotal >= 80) {
+                cg2 = 4.00;
+                finalcg += cg2;
+              } else if (finalTotal <= 79 && finalTotal >= 70) {
+                cg2 = 3.75;
+                finalcg += cg2;
+              } else if (finalTotal <= 69 && finalTotal >= 60) {
+                cg2 = 3.50;
+                finalcg += cg2;
+              } else if (finalTotal <= 59 && finalTotal >= 50) {
+                cg2 = 3.00;
+                finalcg += cg2;
+              } else if (finalTotal <= 49 && finalTotal >= 45) {
+                cg2 = 2.50;
+                finalcg += cg2;
+              } else if (finalTotal <= 44 && finalTotal >= 40) {
+                cg2 = 2.00;
+                finalcg += cg2;
               } else {
-                finalcg = "F";
+                cg2 = 0.00;
+                finalcg += cg2;
               }
 
               return (
@@ -105,11 +119,11 @@ function Result(props) {
                   <td>{e.CT1}</td>
                   <td>{e.mid}</td>
                   <td>{midTotal}</td>
-                  <td>{midcg}</td>
+                  <td>{cg1}</td>
                   <td style={{ display: `${classs === 9 || classs === 11 ? "" : "none"}` }}>{e.CT2}</td>
                   <td>{e.final}</td>
                   <td>{finalTotal}</td>
-                  <td>{finalcg}</td>
+                  <td>{cg2}</td>
                 </tr>
               )
             })}
@@ -118,11 +132,11 @@ function Result(props) {
               <td></td>
               <td>Total & CGPA</td>
               <td>{total1}</td>
-              <td>{cg1}</td>
+              <td>{parseFloat(midcg/result.length).toFixed(2)}</td>
               <td style={{ display: `${classs === 9 || classs === 11 ? "" : "none"}` }}></td>
               <td>Total & CGPA</td>
               <td>{total2}</td>
-              <td>{cg2}</td>
+              <td>{parseFloat(finalcg/result.length).toFixed(2)}</td>
             </tr>
           </tbody>
         </table>

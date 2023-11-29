@@ -42,15 +42,15 @@ function Find_Student(props) {
   }
 
   return (
-    <div className='container' style={{ marginTop: '2%', border: "1px solid #66a3ff", borderRadius: "5px", backgroundColor: "#66a3ff" }}>
+    <div className='container' style={{ marginTop: '2%', borderRadius: "5px" }}>
       <div className="row mb-3">
-        <div className="col" style={{ textAlign: "center", fontSize: "45px" }}>
+        <div className="col" style={{ paddingLeft: "21%", fontSize: "45px" }}>
           <b>Student Info</b>
         </div>
       </div>
       <div className='row'>
         <div className='col'>
-          <form action='' method='' className='login-form'>
+          <form action='' method='' className='teacher-form'>
             <div className="mb-3">
               <label htmlFor="class" className="form-label">Class</label>
               <input type="number" className="form-control" value={props.classs} onChange={(e) => { props.setClasss(e.target.value) }} id="class" min="9" max="12" placeholder="9/10/11/12" />

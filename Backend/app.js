@@ -309,7 +309,7 @@ app.post('/publish_result', async (req, res) => {
 
     let data;
 
-    if(classs==10){
+    if (classs == 10) {
         data = {
             class: classs,
             group: group,
@@ -320,7 +320,7 @@ app.post('/publish_result', async (req, res) => {
             CT2: 0,
             final: final
         }
-    }else{
+    } else {
         data = {
             class: classs,
             group: group,
@@ -497,7 +497,22 @@ app.post('/get_result_for_teacher', async (req, res) => {
     try {
         if (check) {
             res.send({ data: check });
-        }else{
+        } else {
+            res.json("failed");
+        }
+    }
+    catch (e) {
+        console.log(e);
+    }
+})
+
+app.get('/get_full_results', async (req, res) => {
+    const check = await RESULT.find();
+
+    try {
+        if (check) {
+            res.send({ data: check });
+        } else {
             res.json("failed");
         }
     }

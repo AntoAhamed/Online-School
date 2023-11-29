@@ -3,7 +3,7 @@ import bkash from '../Assets/bkash.png'
 
 function Online_Payment() {
     return (
-        <div class="container" style={{ padding: "5% 30% 10% 30%" }}>
+        <div class="container" style={{ padding: "2% 58% 3% 10%" }}>
             <div style={{ padding: "0px 12px 40px 12px", borderRadius: "5px", background: "#da3e70" }}>
                 <div class="row" style={{ background: "white", marginBottom: "50px" }}>
                     <img src={bkash} alt="bkash payment" />

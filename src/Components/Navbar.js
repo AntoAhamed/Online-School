@@ -6,10 +6,10 @@ function Navbar(props) {
   return (
     <>
       <div>
-        <div className='p-4' style={{ textAlign: "center", fontSize: "60px", fontFamily: "Dancing Script", backgroundColor: "#99ceff" }}>
+        <div className='p-4' style={{ textAlign: "center", fontSize: "60px", fontFamily: "Dancing Script", backgroundColor: "#0084ff" }}>
           <b><i>Welcome To The Future Way School & Collage</i></b>
         </div>
-        <nav className="navbar navbar-expand-lg bg-success navbar-success">
+        <nav className="navbar navbar-expand-lg bg-warning navbar-warnig">
           <div className="container-fluid">
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
